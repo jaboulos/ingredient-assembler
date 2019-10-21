@@ -15,7 +15,11 @@ const buildControls = (props) => (
   <div className={classes.BuildControls}>
     {/* loop through all controls, render build control for each of them */}
     {controls.map(ctrl => (
-      <BuildControl key={ctrl.label} label={ctrl.label} />
+      <BuildControl
+        key={ctrl.label}
+        label={ctrl.label}
+        added={() => props.addIngredientHandler(ctrl.type)}
+      />
     ))}
   </div>
 );
