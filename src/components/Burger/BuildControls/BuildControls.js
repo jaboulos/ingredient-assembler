@@ -13,6 +13,7 @@ const controls = [
 // reusable UI element
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
+    <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
     {/* loop through all controls, render build control for each of them */}
     {controls.map(ctrl => (
       <BuildControl
