@@ -31,17 +31,14 @@ class BurgerBuilder extends Component {
     purchasable: false
   }
 
-  updatePurchaseState () {
-    const ingredients = {
-      ...this.state.ingredients
-    };
+  updatePurchaseState (updatedCopiedState) {
     // turn ingredients object into an array of values
-    const sum = Object.keys(ingredients)
+    const sum = Object.keys(updatedCopiedState)
     // map ingredients array into new array with values instead of keys
     .map(igKey => {
       // return old value with new value (key replaced by value in new array)
       // igKey is the keys specified in state, ingredients[igKey] gives the value
-      return ingredients[igKey];
+      return updatedCopiedState[igKey];
     })
     // reduce the values of the array into a sum
     // reduce takes a function as first argument and initial value of 0
@@ -68,6 +65,8 @@ class BurgerBuilder extends Component {
       totalPrice: newPrice,
       ingredients: updatedIngredients,
     });
+    // call updatePurchaseState after calling removeIngredientHandler or addIngredientHandler
+    this.updatePurchaseState(updatedIngredients);
   }
 
   removeIndgredientHandler = (type) => {
@@ -90,6 +89,8 @@ class BurgerBuilder extends Component {
       totalPrice: newPrice,
       ingredients: updatedIngredients,
     });
+    // call updatePurchaseState after calling removeIngredientHandler or addIngredientHandler
+    this.updatePurchaseState(updatedIngredients);
   }
 
   render() {
