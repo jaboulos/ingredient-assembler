@@ -159,7 +159,21 @@ class BurgerBuilder extends Component {
     //   })
 
     // switch the page and push this page on top of the stack of pages
-    this.props.history.push('/checkout');
+    const queryParams = [];
+    // loop through all ingredients
+    for(let i in this.state.ingredients) {
+      // push each ingredient to queryParams array
+      // 'i' is the property name, ingredients[i] is the value
+      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+    }
+
+    // string of ingredients
+    const queryString = queryParams.join('&');
+
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryString
+    });
   }
 
   render() {
