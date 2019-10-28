@@ -10,14 +10,61 @@ import classes from './ContactData.css';
 class ContactData extends Component {
 
   state = {
-    name: '',
-    email: '',
-    address: {
-      street: '',
-      postalCode: ''
-    },
-    loading: false
-  }
+    orderForm: {
+      name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Name'
+        },
+        value: ''
+      },
+      street: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Street Address'
+        },
+        value: ''
+      },
+      zipcode: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Zipcode'
+        },
+        value: ''
+      },
+      country: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Country'
+        },
+        value: ''
+      },
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Email'
+        },
+        value: ''
+      },
+      deliveryMethod: {
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            {value: 'Fastest', displayValue: 'Fastest'},
+            {value: 'Standard', displayValue: 'Standard'},
+            {value: 'Cheapest', displayValue: 'Cheapest'},
+          ]
+        },
+        value: ''
+      },
+      },
+      loading: false
+    }
 
   orderHandler = (event) => {
     event.preventDefault();
@@ -30,16 +77,6 @@ class ContactData extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      customer: {
-        name: 'Joe Test',
-        address: {
-          street: 'Test street 1',
-          zipcode: '12345',
-          country: 'USA'
-        },
-        email: 'test@test.com'
-      },
-      deliveryMethod: '2 day'
     }
 
     axios.post('/orders.json', order)
@@ -61,10 +98,7 @@ class ContactData extends Component {
     let form = (
       <form>
           <Input
-            inputtype='input'
-            type="text"
-            name="name"
-            placeholder="Name..."
+            elementType="..." elementConfig="..." value="..."
           />
           <Input
             inputtype='input'
@@ -103,6 +137,7 @@ class ContactData extends Component {
       </div>
     );
   }
+
 }
 
 export default ContactData;
