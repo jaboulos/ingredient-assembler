@@ -44,14 +44,14 @@ class BurgerBuilder extends Component {
 		//   })
 	}
 
-	updatePurchaseState(updatedCopiedState) {
+	updatePurchaseState(ingredients) {
 		// turn ingredients object into an array of values
-		const sum = Object.keys(updatedCopiedState)
+		const sum = Object.keys(ingredients)
 			// map ingredients array into new array with values instead of keys
 			.map(igKey => {
 				// return old value with new value (key replaced by value in new array)
 				// igKey is the keys specified in state, ingredients[igKey] gives the value
-				return updatedCopiedState[igKey];
+				return ingredients[igKey];
 			})
 			// reduce the values of the array into a sum
 			// reduce takes a function as first argument and initial value of 0
@@ -59,7 +59,7 @@ class BurgerBuilder extends Component {
 				return sum + el;
 			}, 0);
 		// sum > 0 is either True or False, therefore value in state is set to true or false
-		this.setState({ purchasable: sum > 0 });
+		return sum > 0;
 	}
 
 	purchaseHandler = () => {
@@ -73,27 +73,7 @@ class BurgerBuilder extends Component {
 	};
 
 	purchaseContinueHandler = () => {
-		// switch the page and push this page on top of the stack of pages
-		const queryParams = [];
-		// loop through all ingredients
-		for (let i in this.state.ingredients) {
-			// push each ingredient to queryParams array
-			// 'i' is the property name, ingredients[i] is the value
-			queryParams.push(
-				encodeURIComponent(i) +
-					"=" +
-					encodeURIComponent(this.state.ingredients[i])
-			);
-		}
-
-		queryParams.push("price=" + this.state.totalPrice);
-		// string of ingredients
-		const queryString = queryParams.join("&");
-
-		this.props.history.push({
-			pathname: "/checkout",
-			search: "?" + queryString
-		});
+		this.props.history.push('/checkout');
 	};
 
 	render() {
@@ -124,7 +104,7 @@ class BurgerBuilder extends Component {
 						addIngredientHandler={this.props.onIngredientAdded}
 						removeIndgredientHandler={this.props.onIngredientRemoved}
 						disabled={disabledInfo}
-						purchasable={this.state.purchasable}
+						purchasable={this.updatePurchaseState(this.props.ings)}
 						price={this.props.price}
 						ordered={this.purchaseHandler}
 					/>
