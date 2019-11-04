@@ -27,6 +27,7 @@ class Checkout extends Component {
 			let purchasedRedirect = this.props.purchased ? <Redirect to="/" /> : null;
 			summary = (
 				<div>
+					{purchasedRedirect}
 					<CheckoutSummary
 						ingredients={this.props.ings}
 						checkoutCancelled={this.checkoutCancelledHandler}
