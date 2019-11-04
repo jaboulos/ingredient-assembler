@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Button from "../../../components/UI/Button/Button";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import classes from "./ContactData.css";
-import axios from '../../../axios-orders';
+import axios from "../../../axios-orders";
 import Input from "../../../components/UI/Input/Input";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 
@@ -86,16 +86,18 @@ class ContactData extends Component {
 				elementType: "select",
 				elementConfig: {
 					options: [
+						{ value: "normal", displayValue: "Normal" },
 						{ value: "fastest", displayValue: "Fastest" },
-						{ value: "cheapest", displayValue: "Cheapest" }
+						{ value: "cheapest", displayValue: "Cheapest" },
+
 					]
 				},
-				value: "",
+				value: 'normal',
 				validation: {},
 				valid: true
 			}
 		},
-		formIsValid: false,
+		formIsValid: false
 	};
 
 	orderHandler = event => {
@@ -210,9 +212,9 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
 	return {
-		ings: state.ingredients,
-        price: state.totalPrice,
-        loading: state.loading
+		ings: state.burgerBuilder.ingredients,
+		price: state.burgerBuilder.totalPrice,
+		loading: state.order.loading
 	};
 };
 
@@ -222,4 +224,7 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withErrorHandler(ContactData, axios));

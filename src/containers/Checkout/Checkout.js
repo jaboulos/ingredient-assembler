@@ -35,14 +35,14 @@ class Checkout extends Component {
 				</div>
 			);
 		}
-		
-		return { summary };
+
+		return <div>{summary}</div>;
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		ings: state.ingredients
+		ings: state.burgerBuilder.ingredients
 	};
 };
 
