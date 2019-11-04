@@ -1,13 +1,10 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-	ingredients: {
-		salad: 0,
-		bacon: 0,
-		cheese: 0,
-		meat: 0
-	},
-	totalPrice: 4
+	// fetching data from db, initial value should be null
+	ingredients: null,
+	totalPrice: 4,
+	error: false
 };
 
 const INGREDIENT_PRICES = {
