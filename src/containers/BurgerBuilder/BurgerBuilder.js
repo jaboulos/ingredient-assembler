@@ -15,22 +15,19 @@ import axios from "../../axios-orders";
 import * as burgerBuilderActions from '../../store/actions/index.js'
 
 class BurgerBuilder extends Component {
-	// constructor(props) {
-	//   super(props);
-	//   this.state {
-
-	//   }
-	// }
 	state = {
 		// becomes true if at least 1 ingredient has been added
 		purchasable: false,
 		// hide show modal
 		purchasing: false,
-		loading: false,
-		error: false
+		// these 2 properties are on global state in store now
+		// loading: false,
+		// error: false
 	};
 
 	componentDidMount() {
+		console.log('this.props in burgerBuilder container', this.props);
+		// the async request is dispatched as an action now in store/actions/burgerBuilder
 		// axios.get('https://react-ingredient-builder.firebaseio.com/ingredients.json')
 		//   .then(response => {
 		//     this.setState({
@@ -110,7 +107,7 @@ class BurgerBuilder extends Component {
 					/>
 				</Aux>
 			);
-
+ 
 			orderSummary = (
 				<OrderSummary
 					ingredients={this.props.ings}
@@ -122,9 +119,9 @@ class BurgerBuilder extends Component {
 		}
 
 		// Show spinner if loading, if not loading show order modal
-		if (this.state.loading) {
-			orderSummary = <Spinner />;
-		}
+		// if (this.state.loading) {
+		// 	orderSummary = <Spinner />;
+		// }
 
 		return (
 			<Aux>
