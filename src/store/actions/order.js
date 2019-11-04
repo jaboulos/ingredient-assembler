@@ -20,13 +20,13 @@ export const purchaseBurgerStart = () => {
 	return {
 		type: actionTypes.PURCHASE_BURGER_START
 	};
-}
+};
 
 // async
 // action dispatched after clicking order button
 export const purchaseBurger = orderData => {
 	return dispatch => {
-		dispatch(purchaseBurgerStart())
+		dispatch(purchaseBurgerStart());
 		// reach out to axios for post request
 		axios
 			.post("/orders.json", orderData)
@@ -39,4 +39,9 @@ export const purchaseBurger = orderData => {
 			});
 	};
 };
-// test
+
+export const purchaseInit = () => {
+	return {
+		type: actionTypes.PURCHASE_INIT
+	};
+};
